@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  /* Custom Colors */
+  --color-theme-orange: #D87D4A;
+  --color-theme-light-orange: #FBAF85;
+  --color-theme-dark-gray: #101010;
+  --color-theme-black: #000000;
+  --color-theme-white: #FFFFFF;
+  --color-theme-light-gray: #F1F1F1;
+  --color-theme-gray: #fafafa;
+
+  /* Manrope Font */
+  --font-family-sans: 'Manrope', system-ui, sans-serif;
+  --font-family-manrope: 'Manrope', sans-serif;
+}
+
+body {
+  @apply
+  font-family-manrope
+  bg-white
+  text-gray-900;
+}
+
+.container {
+  @apply
+  max-w-[1110px]
+  min-w-[689px]
+  w-full
+  mx-auto;
+}
+
+h2 {
+  @apply
+  font-bold
+  text-[56px]
+  tracking-[2px]
+  leading-[58px]
+  uppercase
+}
+
+/* Button Style */
+.theme-btn {
+  @apply
+  w-40
+  h-12
+  text-sm
+  font-semibold
+  uppercase
+  text-center
+  py-4
+  transition
+  duration-300
+  ease-in-out;
+}
+
+.primary-btn {
+  @apply
+  bg-theme-black
+  text-theme-white
+  hover:bg-gray-800;
+}
+
+.secondary-btn {
+  @apply
+  bg-transparent
+  text-theme-dark-gray
+  border
+  border-theme-dark-gray
+  text-center
+  hover:bg-theme-black
+  hover:text-theme-white;
+}
+
+.triary-btn {
+  @apply
+  flex
+  items-center
+  justify-center
+  gap-[13px]
+  bg-transparent
+  text-theme-black/50
+  hover:text-theme-orange;
+}

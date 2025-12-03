@@ -4,6 +4,7 @@ const App = (props) => {
   return (
     <>
       <Header />
+
       <main class="main-content">
         {props.children}
       </main>

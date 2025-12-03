@@ -1,7 +1,14 @@
+import Hero from '../components/Hero.jsx';
+
 const Headphones = () => {
+    const pageTitle = "Headphones";
+
     return (
         <div>
-            <h1>Headphones Page</h1>
+            <Hero
+                hasHeroImage={false}
+                pageTitle={pageTitle}
+            />
         </div>
     )
 }

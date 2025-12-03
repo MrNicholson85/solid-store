@@ -1,3 +1,4 @@
+import Footer from './components/Footer.jsx';
 import Header from './components/Header.jsx';
 
 const App = (props) => {
@@ -8,6 +9,8 @@ const App = (props) => {
       <main class="main-content">
         {props.children}
       </main>
+
+      <Footer />
     </>
   );
 };

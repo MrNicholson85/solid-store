@@ -1,0 +1,9 @@
+const Headphones = () => {
+    return (
+        <div>
+            <h1>Headphones Page</h1>
+        </div>
+    )
+}
+
+export default Headphones;

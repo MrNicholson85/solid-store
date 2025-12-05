@@ -9,7 +9,7 @@ const ProductCardLg = (props) => {
     const showIcon = props.showIcon || false;
 
     return (
-        <div class="container relative bg-theme-orange rounded-lg h-[720px] lg:h-[560px] overflow-hidden grid lg:flex px-24 gap-16 lg:gap-[138px]">
+        <div class="container mb-12 relative bg-theme-orange rounded-lg h-[720px] lg:h-[560px] overflow-hidden grid lg:flex px-24 gap-16 lg:gap-[138px]">
             {/* Background Pattern */}
             <img src={patternCircles} alt="Background Pattern" class="absolute lg:-translate-x-[165px] -translate-y-[283px] lg:-translate-y-5 inset-0 w-[944px] h-[944px] object-cover"/>
 

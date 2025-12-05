@@ -22,9 +22,9 @@ const Hero = (props) => {
               style={{ "background-image": `url(${heroImage})` }}
             >
               <div class="w-[398px] self-center">
-                <span class="text-sm opacity-50 tracking-widest">{props.productLabel}</span>
+                <span class="theme-overline opacity-50">{props.productLabel}</span>
                 <h1 class="text-4xl lg:text-5xl font-bold uppercase tracking-widest my-4">{props.productTitle}</h1>
-                <p class="opacity-75 leading-6">{props.productDescription}</p>
+                <p>{props.productDescription}</p>
 
                 <button class="mt-6 bg-theme-orange text-theme-white uppercase text-sm font-semibold tracking-widest px-6 py-3 hover:bg-theme-light-orange transition">
                   {props.ctaText}

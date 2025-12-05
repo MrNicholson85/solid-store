@@ -31,13 +31,81 @@ body {
   mx-auto;
 }
 
-h2 {
+h1 {
   @apply
   font-bold
   text-[56px]
   tracking-[2px]
   leading-[58px]
   uppercase
+}
+
+h2 {
+  @apply
+  font-bold
+  text-[40px]
+  tracking-[1.43px]
+  leading-11
+  uppercase
+}
+
+h3 {
+  @apply
+  font-bold
+  text-[32px]
+  tracking-[1.14px]
+  leading-9
+  uppercase
+}
+
+h4 {
+  @apply
+  font-bold
+  text-[28px]
+  tracking-[1px]
+  leading-8
+  uppercase
+}
+
+h5 {
+  @apply
+  font-bold
+  text-[24px]
+  tracking-[0.86px]
+  leading-7
+  uppercase
+}
+
+h6 {
+  @apply
+  font-bold
+  text-[18px]
+  tracking-[0.71px]
+  leading-[33px]
+  uppercase
+}
+
+.theme-overline {
+  @apply
+  text-[18px]
+  tracking-[10px]
+  leading-[19px]
+  uppercase;
+}
+
+subtitle {
+  @apply
+  text-[14px]
+  tracking-[1.3px]
+  leading-[19px]
+  uppercase;
+}
+
+p {
+  @apply
+  text-[15px]
+  tracking-[0.96px]
+  leading-7;
 }
 
 /* Button Style */

@@ -2,6 +2,7 @@ import CategoryCard from "./CategoryCard";
 import imageCategoryHeadphones from '../assets/img/image-removebg-preview.png';
 import imageCategorySpeakers from '../assets/img/speaker.png';
 import imageCategoryEarphones from '../assets/img/category-earphones.png';
+
 const ProductCardLinks = () => {
     return (
         <div className="container">

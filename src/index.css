@@ -151,3 +151,10 @@ p {
   text-theme-black/50
   hover:text-theme-orange;
 }
+
+.alt-btn {
+  @apply
+  bg-theme-orange
+  text-theme-white
+  hover:bg-theme-light-orange;
+}

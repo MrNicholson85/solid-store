@@ -111,6 +111,9 @@ p {
 /* Button Style */
 .theme-btn {
   @apply
+  flex
+  items-center
+  justify-center
   w-40
   h-12
   text-sm

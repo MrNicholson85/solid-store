@@ -14,6 +14,11 @@ import Earphones from './pages/Earphones.jsx';
 import Zx9Speaker from './pages/products/Zx9Speaker.jsx';
 import Zx7Speaker from './pages/products/Zx7Speaker.jsx';
 
+// Admin Pages
+import Login from './pages/admin/Login.jsx';
+import Signup from './pages/admin/Signup.jsx';
+import CreateProduct from './pages/admin/CreateProduct.jsx';
+
 render(() => (
   <Router root={App}>
     <Route path="/" component={Home} />
@@ -24,5 +29,10 @@ render(() => (
     {/* Individual Product Pages */}
     <Route path="/speakers/zx9-speaker" component={Zx9Speaker} />
     <Route path="/speakers/zx7-speaker" component={Zx7Speaker} />
+    
+    {/* Admin Routes */}
+    <Route path="/admin/login" component={Login} />
+    <Route path="/admin/signup" component={Signup} />
+    <Route path="/admin/products" component={CreateProduct} />
   </Router>
 ), document.getElementById('root'));

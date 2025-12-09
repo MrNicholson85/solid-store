@@ -27,40 +27,39 @@ const DynamicProductPage = () => {
             <Show when={!loading() && product()}>
                 <div class="container mx-auto px-6 py-24">
                     <ProductDetail
-                        imgSrc={getImageUrl(product().featuredImage)}
-                        imgAlt={product().productName}
-                        subtitle={product().isNew ? "New Product" : ""}
+                        image={getImageUrl(product().featuredImage)}
                         title={product().productName}
                         description={product().description}
-                        price={product().price}
+                        price={`$ ${product().price.toLocaleString()}`}
                     />
+                    <div class="flex gap-[125px]">
+                        {/* Features Section */}
+                        <Show when={product().features}>
+                            <div class="mt-24 lg:w-[635px]">
+                                <h3 class="text-2xl font-bold mb-6">Features</h3>
+                                <p class="text-gray-600 whitespace-pre-line">{product().features}</p>
+                            </div>
+                        </Show>
 
-                    {/* Features Section */}
-                    <Show when={product().features}>
-                        <div class="mt-24">
-                            <h3 class="text-2xl font-bold mb-6">Features</h3>
-                            <p class="text-gray-600 whitespace-pre-line">{product().features}</p>
-                        </div>
-                    </Show>
-
-                    {/* In The Box Section */}
-                    <Show when={product().inTheBox}>
-                        <div class="mt-24">
-                            <h3 class="text-2xl font-bold mb-6">In The Box</h3>
-                            <ul class="space-y-2">
-                                <For each={product().inTheBox.split('\n').filter(line => line.trim())}>
-                                    {(item) => (
-                                        <li class="text-gray-600 flex items-start">
-                                            <span class="text-theme-orange font-bold mr-4">
-                                                {item.match(/^\d+x?/)?.[0] || '•'}
-                                            </span>
-                                            <span>{item.replace(/^\d+x?\s*/, '')}</span>
-                                        </li>
-                                    )}
-                                </For>
-                            </ul>
-                        </div>
-                    </Show>
+                        {/* In The Box Section */}
+                        <Show when={product().inTheBox}>
+                            <div class="mt-24">
+                                <h3 class="text-2xl font-bold mb-6">In The Box</h3>
+                                <ul class="space-y-2">
+                                    <For each={product().inTheBox.split('\n').filter(line => line.trim())}>
+                                        {(item) => (
+                                            <li class="text-gray-600 flex items-start">
+                                                <span class="text-theme-orange font-bold mr-4">
+                                                    {item.match(/^\d+x?/)?.[0] || '•'}
+                                                </span>
+                                                <span>{item.replace(/^\d+x?\s*/, '')}</span>
+                                            </li>
+                                        )}
+                                    </For>
+                                </ul>
+                            </div>
+                        </Show>
+                    </div>
 
                     {/* Additional Images Gallery */}
                     <Show when={product().additionalImages}>

@@ -30,22 +30,32 @@ const EarphonesFromDB = () => {
             </Show>
 
             <Show when={!loading()}>
-                <div class="container mx-auto px-6 py-12 space-y-24">
-                    <For each={earphones()}>
-                        {(earphone, index) => (
-                            <CategoryCardLg
-                                flipped={index() % 2 !== 0}
-                                imgSrc={getImageUrl(earphone.featuredImage)}
-                                imgAlt={earphone.productName}
-                                subtitle="New Product"
-                                title={earphone.productName}
-                                description={earphone.description}
-                                ctaText="See Product"
-                                ctaHref={`/products/${earphone.productId}`}
-                            />
-                        )}
-                    </For>
-                </div>
+                <Show 
+                    when={earphones().length > 0}
+                    fallback={
+                        <div class="container mx-auto px-6 py-24 text-center">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">No Earphones Available</h2>
+                            <p class="text-gray-600">Check back soon for new products!</p>
+                        </div>
+                    }
+                >
+                    <div class="container mx-auto px-6 py-12 space-y-24">
+                        <For each={earphones()}>
+                            {(earphone, index) => (
+                                <CategoryCardLg
+                                    flipped={index() % 2 !== 0}
+                                    imgSrc={getImageUrl(earphone.featuredImage)}
+                                    imgAlt={earphone.productName}
+                                    subtitle="New Product"
+                                    title={earphone.productName}
+                                    description={earphone.description}
+                                    ctaText="See Product"
+                                    ctaHref={`/products/${earphone.productId}`}
+                                />
+                            )}
+                        </For>
+                    </div>
+                </Show>
             </Show>
 
             <ProductCardLinks />

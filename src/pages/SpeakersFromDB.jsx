@@ -30,22 +30,32 @@ const SpeakersFromDB = () => {
             </Show>
 
             <Show when={!loading()}>
-                <div class="container mx-auto px-6 py-12 space-y-24">
-                    <For each={speakers()}>
-                        {(speaker, index) => (
-                            <CategoryCardLg
-                                flipped={index() % 2 !== 0}
-                                imgSrc={getImageUrl(speaker.featuredImage)}
-                                imgAlt={speaker.productName}
-                                subtitle="New Product"
-                                title={speaker.productName}
-                                description={speaker.description}
-                                ctaText="See Product"
-                                ctaHref={`/products/${speaker.productId}`}
-                            />
-                        )}
-                    </For>
-                </div>
+                <Show 
+                    when={speakers().length > 0}
+                    fallback={
+                        <div class="container mx-auto px-6 py-24 text-center">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">No Speakers Available</h2>
+                            <p class="text-gray-600">Check back soon for new products!</p>
+                        </div>
+                    }
+                >
+                    <div class="container mx-auto px-6 py-12 space-y-24">
+                        <For each={speakers()}>
+                            {(speaker, index) => (
+                                <CategoryCardLg
+                                    flipped={index() % 2 !== 0}
+                                    imgSrc={getImageUrl(speaker.featuredImage)}
+                                    imgAlt={speaker.productName}
+                                    subtitle="New Product"
+                                    title={speaker.productName}
+                                    description={speaker.description}
+                                    ctaText="See Product"
+                                    ctaHref={`/products/${speaker.productId}`}
+                                />
+                            )}
+                        </For>
+                    </div>
+                </Show>
             </Show>
 
             <ProductCardLinks />

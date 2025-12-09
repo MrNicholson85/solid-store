@@ -13,13 +13,15 @@ const Home = (props) => {
     return (
         <div>
             <Hero 
-            hasHeroImage={true} 
-            heroImage={heroImage} 
-            pageTitle={pageTitle} 
-            productLabel="NEW PRODUCT" 
-            productTitle="XX99 Mark II Headphones" 
-            productDescription="Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast."
-            ctaText="SEE PRODUCT" />
+                hasHeroImage={true} 
+                heroImage={heroImage} 
+                pageTitle={pageTitle} 
+                productLabel="NEW PRODUCT" 
+                productTitle="XX99 Mark II Headphones" 
+                productDescription="Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast."
+                ctaText="SEE PRODUCT" 
+                ctaHref="/products/1"
+            />
 
             <ProductCardLinks />
             
@@ -28,11 +30,12 @@ const Home = (props) => {
                 description="Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound." 
                 showButton={true} 
                 showIcon={false}
+                ctaHref="/products/4"
             />
 
             <ProductCardSm
                 title="ZX7 Speaker"
-                link="/products/zx7-speaker"
+                ctaHref="/products/5"
                 ctaText="SEE PRODUCT"
                 bgImage={productImage}
             />
@@ -40,7 +43,7 @@ const Home = (props) => {
             <ProductCards
                 bgImage={ProductCardSMImg}
                 title="YX1 Earphones"
-                link="/products/yx1-earphones"
+                ctaHref="/products/6"
                 ctaText="SEE PRODUCT"
             />
         </div>

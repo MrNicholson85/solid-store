@@ -1,3 +1,5 @@
+import {A} from '@solidjs/router';
+
 import productImage from '../assets/img/image-speaker-zx9.png';
 import patternCircles from '../assets/img/pattern-circles.svg';
 import iconRightArrow from '../assets/img/icon-arrow-right.svg';
@@ -24,13 +26,13 @@ const ProductCardLg = (props) => {
                 <p class="mb-10 text-base leading-6 opacity-75">{props.description}</p>
 
                 {showButton && (
-                    <button class="theme-btn primary-btn mx-auto lg:mx-0">
+                    <A href={props.ctaHref} class="theme-btn primary-btn mx-auto lg:mx-0">
                         See Product
                         
                         {showIcon && (
                         <i><img src={iconRightArrow} alt="Right Arrow Icon" /></i>
                         )}
-                    </button>
+                    </A>
                 )}
 
             </div>

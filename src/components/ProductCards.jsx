@@ -9,7 +9,7 @@ const ProductCards = (props) => {
             <div class="bg-theme-light-gray flex items-center px-8 lg:px-0 rounded-lg w-1/2">
                 <div class="grid w-[204px] gap-6 ml-[95px]">
                     <h4>{props.title}</h4>
-                    <A href={props.link} class="leading-3.5 theme-btn secondary-btn text-sm uppercase text-theme-orange font-bold tracking-widest hover:underline">
+                    <A href={props.ctaHref} class="leading-3.5 theme-btn secondary-btn text-sm uppercase text-theme-orange font-bold tracking-widest hover:underline">
                         {props.ctaText}
                     </A>
                 </div>

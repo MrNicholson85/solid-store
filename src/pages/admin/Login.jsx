@@ -19,7 +19,7 @@ const Login = () => {
         setIsLoading(false);
 
         if (result.success) {
-            navigate('/admin/products');
+            navigate('/admin/profile');
         } else {
             setError(result.error);
         }

@@ -1,4 +1,4 @@
-import { createSignal } from 'solid-js';
+import { createSignal, For } from 'solid-js';
 import { databases, storage, DATABASE_ID, PRODUCTS_COLLECTION_ID, BUCKET_ID } from '../../lib/appwrite';
 import { user, logout } from '../../lib/auth';
 import { useNavigate } from '@solidjs/router';
@@ -15,8 +15,9 @@ const CreateProduct = () => {
     const [category, setCategory] = createSignal('headphones');
     const [image, setImage] = createSignal(null);
     const [additionalImages, setAdditionalImages] = createSignal([]);
+    const [features, setFeatures] = createSignal('');
     const [featuredImage, setFeaturedImage] = createSignal('');
-    const [inTheBox, setInTheBox] = createSignal('');
+    const [inTheBoxItems, setInTheBoxItems] = createSignal([{ quantity: '', item: '' }]);
     
     const [isLoading, setIsLoading] = createSignal(false);
     const [error, setError] = createSignal('');
@@ -94,6 +95,12 @@ const CreateProduct = () => {
                 }
             }
 
+            // Format in the box items as JSON string
+            const inTheBoxData = inTheBoxItems()
+                .filter(item => item.quantity && item.item)
+                .map(item => `${item.quantity}x ${item.item}`)
+                .join('\n');
+
             // Create product document in Appwrite Database
             await databases.createDocument(
                 DATABASE_ID,
@@ -109,7 +116,8 @@ const CreateProduct = () => {
                     createdDate: new Date().toISOString(),
                     featuredImage: imageUrl || null,
                     additionalImages: additionalImageIds.join(',') || null,
-                    inTheBox: inTheBox() || null
+                    features: features() || null,
+                    inTheBox: inTheBoxData || null
                 }
             );
 
@@ -123,8 +131,9 @@ const CreateProduct = () => {
             setCategory('headphones');
             setImage(null);
             setAdditionalImages([]);
+            setFeatures('');
             setFeaturedImage('');
-            setInTheBox('');
+            setInTheBoxItems([{ quantity: '', item: '' }]);
             await fetchNextProductId(); // Get next ID for next product
             
         } catch (err) {
@@ -267,16 +276,68 @@ const CreateProduct = () => {
                             </p>
                         </div>
 
+                        {/* Features */}
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Features</label>
+                            <textarea
+                                rows="6"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-theme-orange focus:border-theme-orange"
+                                placeholder="Describe product features, separate paragraphs with double line breaks"
+                                value={features()}
+                                onInput={(e) => setFeatures(e.target.value)}
+                            />
+                        </div>
+
                         {/* In The Box */}
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">In The Box</label>
-                            <textarea
-                                rows="4"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-theme-orange focus:border-theme-orange"
-                                placeholder="Format: 2x Speaker Unit, 1x User Manual"
-                                value={inTheBox()}
-                                onInput={(e) => setInTheBox(e.target.value)}
-                            />
+                            <div class="space-y-3">
+                                <For each={inTheBoxItems()}>
+                                    {(item, index) => (
+                                        <div class="flex gap-2">
+                                            <input
+                                                type="number"
+                                                placeholder="Qty"
+                                                class="w-20 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-theme-orange focus:border-theme-orange"
+                                                value={item.quantity}
+                                                onInput={(e) => {
+                                                    const items = [...inTheBoxItems()];
+                                                    items[index()].quantity = e.target.value;
+                                                    setInTheBoxItems(items);
+                                                }}
+                                            />
+                                            <input
+                                                type="text"
+                                                placeholder="Item name"
+                                                class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-theme-orange focus:border-theme-orange"
+                                                value={item.item}
+                                                onInput={(e) => {
+                                                    const items = [...inTheBoxItems()];
+                                                    items[index()].item = e.target.value;
+                                                    setInTheBoxItems(items);
+                                                }}
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => {
+                                                    const items = inTheBoxItems().filter((_, i) => i !== index());
+                                                    setInTheBoxItems(items.length ? items : [{ quantity: '', item: '' }]);
+                                                }}
+                                                class="px-3 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                                            >
+                                                Remove
+                                            </button>
+                                        </div>
+                                    )}
+                                </For>
+                                <button
+                                    type="button"
+                                    onClick={() => setInTheBoxItems([...inTheBoxItems(), { quantity: '', item: '' }])}
+                                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300"
+                                >
+                                    + Add Item
+                                </button>
+                            </div>
                         </div>
 
                         {/* Submit Button */}

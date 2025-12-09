@@ -1,8 +1,14 @@
 import { A } from '@solidjs/router';
-import { createSignal, Show } from 'solid-js';
+import { createSignal, Show, onMount } from 'solid-js';
+import { user, logout, checkAuth } from '../lib/auth';
 
 const Header = () => {
   const [isCartOpen, setIsCartOpen] = createSignal(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = createSignal(false);
+
+  onMount(() => {
+    checkAuth();
+  });
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen());
@@ -10,6 +16,20 @@ const Header = () => {
 
   const closeCart = () => {
     setIsCartOpen(false);
+  };
+
+  const toggleUserMenu = () => {
+    setIsUserMenuOpen(!isUserMenuOpen());
+  };
+
+  const closeUserMenu = () => {
+    setIsUserMenuOpen(false);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    closeUserMenu();
+    window.location.href = '/admin/login';
   };
 
   return (
@@ -38,20 +58,102 @@ const Header = () => {
             </A>
           </nav>
 
-          {/* Cart Icon */}
-          <button 
-            class="hover:text-theme-orange transition relative z-50" 
-            aria-label="Shopping Cart"
-            onClick={toggleCart}
-          >
-            <svg width="23" height="20" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8.625 15.833c1.132 0 2.054.935 2.054 2.084 0 1.148-.922 2.083-2.054 2.083-1.132 0-2.054-.935-2.054-2.083 0-1.15.922-2.084 2.054-2.084zm9.857 0c1.132 0 2.054.935 2.054 2.084 0 1.148-.922 2.083-2.054 2.083-1.132 0-2.053-.935-2.053-2.083 0-1.15.92-2.084 2.053-2.084zm-9.857 1.39a.69.69 0 00-.685.694.69.69 0 00.685.694.69.69 0 00.685-.694.69.69 0 00-.685-.695zm9.857 0a.69.69 0 00-.684.694.69.69 0 00.684.694.69.69 0 00.685-.694.69.69 0 00-.685-.695zM4.717 0c.316 0 .59.215.658.517l.481 2.122h15.47a.68.68 0 01.538.262c.127.166.168.38.11.579l-2.695 9.236a.672.672 0 01-.648.478H7.41a.667.667 0 00-.673.66c0 .364.303.66.674.66h12.219c.372 0 .674.295.674.66 0 .364-.302.66-.674.66H7.412c-1.115 0-2.021-.889-2.021-1.98 0-.812.502-1.511 1.218-1.816L4.176 1.32H.674A.667.667 0 010 .66C0 .296.302 0 .674 0zm16.716 3.958H6.156l1.797 7.917h11.17l2.31-7.917z" fill="currentColor" fill-rule="nonzero" />
-            </svg>
-          </button>
+          {/* Login & Cart Icons */}
+          <div class="flex items-center gap-6">
+            {/* User Menu Icon */}
+            <div class="relative z-50">
+              <button 
+                class="hover:text-theme-orange transition" 
+                aria-label="User Menu"
+                onClick={toggleUserMenu}
+                type="button"
+              >
+                <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                  <path d="M10 0C7.79 0 6 1.79 6 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0 4c-3.31 0-6 2.69-6 6v2h12v-2c0-3.31-2.69-6-6-6zm4 6H6v-.5c0-2.21 1.79-4 4-4s4 1.79 4 4v.5z"/>
+                </svg>
+              </button>
+
+              {/* User Dropdown Menu */}
+              <Show when={isUserMenuOpen()}>
+                <div class="absolute top-12 right-0 w-56 bg-white rounded-lg shadow-2xl py-2 z-[60] border border-gray-200">
+                  <Show 
+                    when={user()}
+                    fallback={
+                      <>
+                        <A 
+                          href="/admin/login" 
+                          class="block px-4 py-3 text-gray-700 hover:bg-gray-100 transition"
+                          onClick={closeUserMenu}
+                        >
+                          <div class="font-semibold">Login</div>
+                          <div class="text-xs text-gray-500">Access your account</div>
+                        </A>
+                        <A 
+                          href="/admin/signup" 
+                          class="block px-4 py-3 text-gray-700 hover:bg-gray-100 transition border-t border-gray-100"
+                          onClick={closeUserMenu}
+                        >
+                          <div class="font-semibold">Sign Up</div>
+                          <div class="text-xs text-gray-500">Create new account</div>
+                        </A>
+                      </>
+                    }
+                  >
+                    <div class="px-4 py-3 border-b border-gray-100">
+                      <div class="font-semibold text-gray-900">{user()?.name}</div>
+                      <div class="text-xs text-gray-500">{user()?.email}</div>
+                    </div>
+                    <A 
+                      href="/admin/profile" 
+                      class="block px-4 py-3 text-gray-700 hover:bg-gray-100 transition"
+                      onClick={closeUserMenu}
+                    >
+                      <div class="font-semibold">Profile</div>
+                      <div class="text-xs text-gray-500">View your profile</div>
+                    </A>
+                    <A 
+                      href="/admin/products" 
+                      class="block px-4 py-3 text-gray-700 hover:bg-gray-100 transition"
+                      onClick={closeUserMenu}
+                    >
+                      <div class="font-semibold">Create Product</div>
+                      <div class="text-xs text-gray-500">Add new products</div>
+                    </A>
+                    <button 
+                      onClick={handleLogout}
+                      class="w-full text-left px-4 py-3 text-red-600 hover:bg-red-50 transition border-t border-gray-100"
+                    >
+                      <div class="font-semibold">Logout</div>
+                      <div class="text-xs text-red-400">Sign out of account</div>
+                    </button>
+                  </Show>
+                </div>
+              </Show>
+            </div>
+
+            {/* Cart Icon */}
+            <button 
+              class="hover:text-theme-orange transition relative z-50" 
+              aria-label="Shopping Cart"
+              onClick={toggleCart}
+            >
+              <svg width="23" height="20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.625 15.833c1.132 0 2.054.935 2.054 2.084 0 1.148-.922 2.083-2.054 2.083-1.132 0-2.054-.935-2.054-2.083 0-1.15.922-2.084 2.054-2.084zm9.857 0c1.132 0 2.054.935 2.054 2.084 0 1.148-.922 2.083-2.054 2.083-1.132 0-2.053-.935-2.053-2.083 0-1.15.92-2.084 2.053-2.084zm-9.857 1.39a.69.69 0 00-.685.694.69.69 0 00.685.694.69.69 0 00.685-.694.69.69 0 00-.685-.695zm9.857 0a.69.69 0 00-.684.694.69.69 0 00.684.694.69.69 0 00.685-.694.69.69 0 00-.685-.695zM4.717 0c.316 0 .59.215.658.517l.481 2.122h15.47a.68.68 0 01.538.262c.127.166.168.38.11.579l-2.695 9.236a.672.672 0 01-.648.478H7.41a.667.667 0 00-.673.66c0 .364.303.66.674.66h12.219c.372 0 .674.295.674.66 0 .364-.302.66-.674.66H7.412c-1.115 0-2.021-.889-2.021-1.98 0-.812.502-1.511 1.218-1.816L4.176 1.32H.674A.667.667 0 010 .66C0 .296.302 0 .674 0zm16.716 3.958H6.156l1.797 7.917h11.17l2.31-7.917z" fill="currentColor" fill-rule="nonzero" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         <hr class="container mt-8 border-white/20" />
       </header>
+
+      {/* User Menu Backdrop */}
+      <Show when={isUserMenuOpen()}>
+        <div 
+          class="fixed inset-0 z-40"
+          onClick={closeUserMenu}
+        ></div>
+      </Show>
 
       {/* Cart Modal */}
       <Show when={isCartOpen()}>

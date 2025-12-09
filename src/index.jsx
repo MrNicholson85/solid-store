@@ -6,16 +6,11 @@ import 'solid-devtools';
 
 import App from './App.jsx';
 import Home from './pages/Home.jsx';
-import Headphones from './pages/Headphones.jsx';
 import HeadphonesFromDB from './pages/HeadphonesFromDB.jsx';
-import Speakers from './pages/Speakers.jsx';
 import SpeakersFromDB from './pages/SpeakersFromDB.jsx';
-import Earphones from './pages/Earphones.jsx';
 import EarphonesFromDB from './pages/EarphonesFromDB.jsx';
 
 // Product Pages
-import Zx9Speaker from './pages/products/Zx9Speaker.jsx';
-import Zx7Speaker from './pages/products/Zx7Speaker.jsx';
 import DynamicProduct from './pages/products/DynamicProduct.jsx';
 
 // Admin Pages
@@ -35,10 +30,6 @@ render(() => (
     
     {/* Dynamic Product Page */}
     <Route path="/products/:id" component={DynamicProduct} />
-    
-    {/* Static Product Pages (fallback) */}
-    <Route path="/speakers/zx9-speaker" component={Zx9Speaker} />
-    <Route path="/speakers/zx7-speaker" component={Zx7Speaker} />
     
     {/* Admin Routes */}
     <Route path="/admin/login" component={Login} />

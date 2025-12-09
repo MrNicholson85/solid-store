@@ -93,6 +93,12 @@ const Profile = () => {
                                     Create New Product
                                 </button>
                                 <button
+                                    onClick={() => navigate('/admin/manage-products')}
+                                    class="px-6 py-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition font-bold text-center"
+                                >
+                                    Manage Products
+                                </button>
+                                <button
                                     onClick={() => navigate('/')}
                                     class="px-6 py-4 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition font-bold text-center"
                                 >

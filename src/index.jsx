@@ -23,6 +23,8 @@ import Login from './pages/admin/Login.jsx';
 import Signup from './pages/admin/Signup.jsx';
 import Profile from './pages/admin/Profile.jsx';
 import CreateProduct from './pages/admin/CreateProduct.jsx';
+import ManageProducts from './pages/admin/ManageProducts.jsx';
+import EditProduct from './pages/admin/EditProduct.jsx';
 
 render(() => (
   <Router root={App}>
@@ -43,5 +45,7 @@ render(() => (
     <Route path="/admin/signup" component={Signup} />
     <Route path="/admin/profile" component={Profile} />
     <Route path="/admin/products" component={CreateProduct} />
+    <Route path="/admin/manage-products" component={ManageProducts} />
+    <Route path="/admin/products/edit/:id" component={EditProduct} />
   </Router>
 ), document.getElementById('root'));

@@ -143,6 +143,15 @@ const Header = () => {
                 <div class="text-xs text-gray-500 mt-1">Add new products</div>
               </A>
               <div class="border-t border-gray-100"></div>
+              <A
+                href="/admin/manage-products"
+                class="block px-6 py-4 text-gray-700 hover:bg-gray-100 transition"
+                onClick={closeUserMenu}
+              >
+                <div class="font-semibold text-base">Manage Products</div>
+                <div class="text-xs text-gray-500 mt-1">Edit or delete products</div>
+              </A>
+              <div class="border-t border-gray-100"></div>
               <button
                 onClick={handleLogout}
                 class="w-full text-left px-6 py-4 text-red-600 hover:bg-red-50 transition"

@@ -343,6 +343,7 @@ const Checkout = () => {
             </div>
 
             {/* Order Confirmation Modal */}
+            <Show when={showConfirmation()}>
                 <div class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
                     <div class="bg-white rounded-lg p-8 lg:p-12 max-w-lg w-full">
                         {/* Success Icon */}
@@ -399,6 +400,7 @@ const Checkout = () => {
                         </button>
                     </div>
                 </div>
+            </Show>
         </>
     );
 };

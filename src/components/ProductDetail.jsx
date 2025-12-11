@@ -1,4 +1,5 @@
 import { createSignal } from 'solid-js';
+import { addToCart, openCart } from '../lib/cart';
 
 const ProductDetail = (props) => {
     const [quantity, setQuantity] = createSignal(1);
@@ -10,6 +11,14 @@ const ProductDetail = (props) => {
     const decrement = () => {
         if (quantity() > 1) {
             setQuantity(quantity() - 1);
+        }
+    };
+
+    const handleAddToCart = () => {
+        if (props.product) {
+            addToCart(props.product, quantity());
+            openCart();
+            setQuantity(1); // Reset quantity after adding
         }
     };
 
@@ -49,7 +58,10 @@ const ProductDetail = (props) => {
                             +
                         </button>
                     </div>
-                    <button class="bg-theme-orange text-white px-8 py-3 uppercase text-sm font-bold tracking-widest hover:bg-theme-light-orange transition">
+                    <button 
+                        onClick={handleAddToCart}
+                        class="bg-theme-orange text-white px-8 py-3 uppercase text-sm font-bold tracking-widest hover:bg-theme-light-orange transition"
+                    >
                         Add to Cart
                     </button>
                 </div>

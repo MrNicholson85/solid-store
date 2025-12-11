@@ -27,6 +27,7 @@ const DynamicProductPage = () => {
             <Show when={!loading() && product()}>
                 <div class="container mx-auto px-6 py-24">
                     <ProductDetail
+                        product={product()}
                         image={getImageUrl(product().featuredImage)}
                         title={product().productName}
                         description={product().description}

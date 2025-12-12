@@ -18,10 +18,10 @@ const Hero = (props) => {
         >
           <div class="bg-[#191919]">
             <div
-              class="container lg:flex text-theme-white mb-[120px] lg:h-[629px] bg-cover bg-no-repeat"
+              class="container lg:flex text-theme-white mb-[120px] lg:h-[629px] bg-cover bg-no-repeat py-16 lg:py-0"
               style={{ "background-image": `url(${heroImage})` }}
             >
-              <div class="w-[398px] flex flex-col self-center">
+              <div class="w-full md:w-[398px] flex flex-col self-center">
                 <span class="theme-overline opacity-50">{props.productLabel}</span>
                 <h1 class="text-4xl lg:text-5xl font-bold uppercase tracking-widest my-4">{props.productTitle}</h1>
                 <p>{props.productDescription}</p>

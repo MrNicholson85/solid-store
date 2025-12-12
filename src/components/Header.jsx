@@ -4,39 +4,72 @@ import { user, logout, checkAuth } from '../lib/auth';
 import { isCartOpen, toggleCart, closeCart, getCartItemCount } from '../lib/cart';
 import Cart from './Cart';
 
+// Header Component
 const Header = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = createSignal(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = createSignal(false);
 
+  // Check authentication status on mount
   onMount(() => {
     checkAuth();
   });
 
+  // Toggle Functions
   const toggleUserMenu = () => {
     setIsUserMenuOpen(!isUserMenuOpen());
   };
 
+  // Close Functions
   const closeUserMenu = () => {
     setIsUserMenuOpen(false);
   };
 
+  // Mobile Menu Functions
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen());
+  };
+
+  // Close Mobile Menu
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
+  // Handle Logout
   const handleLogout = async () => {
     await logout();
     closeUserMenu();
+    closeMobileMenu();
     window.location.href = '/admin/login';
   };
 
   return (
     <>
-      <header class="bg-[#191919] text-theme-white pt-8 px-8 lg:px-0 relative z-50">
+      <header class="bg-[#191919] text-theme-white pt-8 lg:px-0 relative z-50">
 
         <div class="container overflow-visible relative nav mx-auto flex items-center justify-between">
+          {/* Mobile Menu Button */}
+          <button 
+            class="lg:hidden hover:text-theme-orange transition" 
+            aria-label="Mobile Menu"
+            onClick={toggleMobileMenu}
+            type="button"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+              <Show when={!isMobileMenuOpen()} fallback={
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+              }>
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+              </Show>
+            </svg>
+          </button>
+
           {/* Logo */}
           <A href="/" class="text-2xl font-black tracking-wider hover:text-theme-orange transition">
             audiophile
           </A>
 
-          {/* Navigation */}
-          <nav class="hidden md:flex gap-8">
+          {/* Desktop Navigation */}
+          <nav class="hidden lg:flex gap-8">
             <A href="/" class="uppercase text-sm font-semibold tracking-widest hover:text-theme-orange transition">
               Home
             </A>
@@ -53,9 +86,9 @@ const Header = () => {
 
           {/* Login & Cart Icons */}
           <div class="flex items-center gap-6">
-            {/* User Menu Icon */}
+            {/* User Menu Icon - Desktop Only */}
             <button 
-              class="hover:text-theme-orange transition" 
+              class="hidden lg:block hover:text-theme-orange transition" 
               aria-label="User Menu"
               onClick={toggleUserMenu}
               type="button"
@@ -85,7 +118,119 @@ const Header = () => {
 
         <hr class="container mt-8 border-white/20" />
 
-        {/* User Menu Modal */}
+        {/* Mobile Menu Modal */}
+        <Show when={isMobileMenuOpen()}>
+          {/* Backdrop */}
+          <div
+            class="fixed inset-0 bg-black/50 z-40"
+            onClick={closeMobileMenu}
+          ></div>
+
+          {/* Mobile Menu */}
+          <div class="fixed top-24 left-4 right-4 bg-white rounded-lg shadow-2xl z-50 overflow-hidden max-h-[80vh] overflow-y-auto">
+            {/* Navigation Links */}
+            <div class="border-b border-gray-200">
+              <A
+                href="/"
+                class="block px-6 py-4 text-gray-700 hover:bg-gray-100 transition"
+                onClick={closeMobileMenu}
+              >
+                <div class="font-semibold text-base uppercase tracking-widest">Home</div>
+              </A>
+              <div class="border-t border-gray-100"></div>
+              <A
+                href="/headphones"
+                class="block px-6 py-4 text-gray-700 hover:bg-gray-100 transition"
+                onClick={closeMobileMenu}
+              >
+                <div class="font-semibold text-base uppercase tracking-widest">Headphones</div>
+              </A>
+              <div class="border-t border-gray-100"></div>
+              <A
+                href="/speakers"
+                class="block px-6 py-4 text-gray-700 hover:bg-gray-100 transition"
+                onClick={closeMobileMenu}
+              >
+                <div class="font-semibold text-base uppercase tracking-widest">Speakers</div>
+              </A>
+              <div class="border-t border-gray-100"></div>
+              <A
+                href="/earphones"
+                class="block px-6 py-4 text-gray-700 hover:bg-gray-100 transition"
+                onClick={closeMobileMenu}
+              >
+                <div class="font-semibold text-base uppercase tracking-widest">Earphones</div>
+              </A>
+            </div>
+
+            {/* User Section */}
+            <Show
+              when={user()}
+              fallback={
+                <>
+                  <A
+                    href="/admin/login"
+                    class="block px-6 py-4 text-gray-700 hover:bg-gray-100 transition"
+                    onClick={closeMobileMenu}
+                  >
+                    <div class="font-semibold text-base">Login</div>
+                    <div class="text-xs text-gray-500 mt-1">Access your account</div>
+                  </A>
+                  <div class="border-t border-gray-100"></div>
+                  <A
+                    href="/admin/signup"
+                    class="block px-6 py-4 text-gray-700 hover:bg-gray-100 transition"
+                    onClick={closeMobileMenu}
+                  >
+                    <div class="font-semibold text-base">Sign Up</div>
+                    <div class="text-xs text-gray-500 mt-1">Create new account</div>
+                  </A>
+                </>
+              }
+            >
+              <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
+                <div class="font-semibold text-gray-900 text-base">{user()?.name}</div>
+                <div class="text-xs text-gray-500 mt-1">{user()?.email}</div>
+              </div>
+              <A
+                href="/admin/profile"
+                class="block px-6 py-4 text-gray-700 hover:bg-gray-100 transition"
+                onClick={closeMobileMenu}
+              >
+                <div class="font-semibold text-base">Profile</div>
+                <div class="text-xs text-gray-500 mt-1">View your profile</div>
+              </A>
+              <div class="border-t border-gray-100"></div>
+              <A
+                href="/admin/products"
+                class="block px-6 py-4 text-gray-700 hover:bg-gray-100 transition"
+                onClick={closeMobileMenu}
+              >
+                <div class="font-semibold text-base">Create Product</div>
+                <div class="text-xs text-gray-500 mt-1">Add new products</div>
+              </A>
+              <div class="border-t border-gray-100"></div>
+              <A
+                href="/admin/manage-products"
+                class="block px-6 py-4 text-gray-700 hover:bg-gray-100 transition"
+                onClick={closeMobileMenu}
+              >
+                <div class="font-semibold text-base">Manage Products</div>
+                <div class="text-xs text-gray-500 mt-1">Edit or delete products</div>
+              </A>
+              <div class="border-t border-gray-100"></div>
+              <button
+                onClick={handleLogout}
+                class="w-full text-left px-6 py-4 text-red-600 hover:bg-red-50 transition"
+              >
+                <div class="font-semibold text-base">Logout</div>
+                <div class="text-xs text-red-400 mt-1">Sign out of account</div>
+              </button>
+            </Show>
+          </div>
+        </Show>
+
+        {/* User Menu Modal - Desktop Only */}
         <Show when={isUserMenuOpen()}>
           {/* Backdrop */}
           <div

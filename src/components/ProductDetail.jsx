@@ -23,9 +23,9 @@ const ProductDetail = (props) => {
     };
 
     return (
-        <div class="grid lg:grid-cols-2 gap-16 mb-24">
+        <div class="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 mb-16 md:mb-24">
             {/* Product Image */}
-            <div class="bg-theme-light-gray rounded-lg overflow-hidden">
+            <div class="bg-theme-light-gray rounded-lg overflow-hidden min-h-[300px] md:min-h-[400px]">
                 <img
                     src={props.image}
                     alt={props.title}
@@ -35,14 +35,14 @@ const ProductDetail = (props) => {
 
             {/* Product Info */}
             <div class="flex flex-col justify-center">
-                <h2 class="mb-6">{props.title}</h2>
-                <p class="text-gray-600 mb-8 leading-relaxed">
+                <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6">{props.title}</h2>
+                <p class="text-gray-600 mb-6 md:mb-8 leading-relaxed text-sm md:text-base">
                     {props.description}
                 </p>
-                <p class="text-2xl font-bold mb-8">{props.price}</p>
+                <p class="text-xl md:text-2xl font-bold mb-6 md:mb-8">{props.price}</p>
 
                 {/* Add to Cart */}
-                <div class="flex gap-4">
+                <div class="flex flex-col sm:flex-row gap-4">
                     <div class="flex items-center bg-theme-light-gray">
                         <button 
                             class="px-4 py-3 hover:text-theme-orange transition font-bold"

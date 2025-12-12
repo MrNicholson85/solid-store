@@ -1,6 +1,6 @@
 const LastCall = (props) => {
     return (
-        <div class="container flex gap-[125px] items-center mx-h-[588px] h-full">
+        <div class="container grid gap-10 lg:flex lg:gap-[125px] items-center mx-h-[588px] h-full">
             <div>
                 <h2 class="mb-8">{props.title}</h2>
                 <p>{props.copy}</p>

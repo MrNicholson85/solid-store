@@ -26,15 +26,16 @@ body {
 .container {
   @apply
   max-w-[1110px]
-  min-w-[689px]
+  min-w-[275px]
   w-full
-  mx-auto;
+  mx-auto
+  px-8;
 }
 
 h1 {
   @apply
   font-bold
-  text-[56px]
+  lg:text-[56px]
   tracking-[2px]
   leading-[58px]
   uppercase
@@ -87,9 +88,12 @@ h6 {
 
 .theme-overline {
   @apply
-  text-[18px]
-  tracking-[10px]
+  text-sm
+  tracking-[5px]
   leading-[19px]
+  lg:text-[18px]
+  lg:tracking-[10px]
+  lg:leading-[19px]
   uppercase;
 }
 

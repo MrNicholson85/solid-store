@@ -93,11 +93,11 @@ const Checkout = () => {
                         Go Back
                     </button>
 
-                    <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="grid lg:grid-cols-3 gap-6 lg:gap-8">
                         {/* Checkout Form */}
                         <div class="lg:col-span-2">
-                            <form onSubmit={handleSubmit} class="bg-white rounded-lg p-8 lg:p-12">
-                                <h1 class="text-3xl font-bold mb-8">Checkout</h1>
+                            <form onSubmit={handleSubmit} class="bg-white rounded-lg p-6 sm:p-8 lg:p-12">
+                                <h1 class="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">Checkout</h1>
 
                                 {/* Error Message */}
                                 <Show when={error()}>
@@ -281,7 +281,7 @@ const Checkout = () => {
 
                         {/* Order Summary */}
                         <div class="lg:col-span-1">
-                            <div class="bg-white rounded-lg p-8 sticky top-8">
+                            <div class="bg-white rounded-lg p-6 sm:p-8 lg:sticky lg:top-8">
                                 <h2 class="text-lg font-bold uppercase tracking-wider mb-6">Summary</h2>
                                 
                                 {/* Cart Items */}
@@ -345,7 +345,7 @@ const Checkout = () => {
             {/* Order Confirmation Modal */}
             <Show when={showConfirmation()}>
                 <div class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-                    <div class="bg-white rounded-lg p-8 lg:p-12 max-w-lg w-full">
+                    <div class="bg-white rounded-lg p-6 sm:p-8 lg:p-12 max-w-lg w-full max-h-[90vh] overflow-y-auto">
                         {/* Success Icon */}
                         <div class="w-16 h-16 bg-theme-orange rounded-full flex items-center justify-center mb-6">
                             <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">

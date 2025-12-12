@@ -21,7 +21,7 @@ const Cart = () => {
     };
 
     return (
-        <div class="fixed top-24 right-8 lg:right-24 w-[377px] bg-white rounded-lg p-8 z-50 shadow-2xl">
+        <div class="fixed top-24 right-4 left-4 sm:left-auto sm:right-8 lg:right-24 sm:w-[377px] bg-white rounded-lg p-6 sm:p-8 z-50 shadow-2xl max-h-[80vh] overflow-y-auto">
             {/* Header */}
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-lg font-bold uppercase tracking-wider">

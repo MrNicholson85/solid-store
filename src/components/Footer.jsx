@@ -6,13 +6,13 @@ import twIcon from '../assets/img/icon-twitter.svg';
 const Footer = () => {
     return (
         <footer class="bg-[#191919] text-theme-white py-8 mt-20">
-            <div class="container">
-                <div class="flex flex-col md:flex-row md:justify-between ">
-                    <A href="/" class="text-2xl font-black tracking-wider hover:text-theme-orange transition mb-6">
+            <div class="container px-6">
+                <div class="flex flex-col lg:flex-row lg:justify-between ">
+                    <A href="/" class="text-2xl font-black tracking-wider hover:text-theme-orange transition mb-6 lg:mb-0">
                         audiophile
                     </A>
-                    <div class="flex flex-col md:flex-row md:justify-between gap-6 mb-6">
-                        <nav class="flex flex-col md:flex-row gap-6 md:gap-12">
+                    <div class="flex flex-col lg:flex-row lg:justify-between gap-6 mb-6 lg:mb-0">
+                        <nav class="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-12">
                             <A href="/" class="uppercase text-sm font-semibold tracking-widest hover:text-theme-orange transition">
                                 Home
                             </A>
@@ -28,13 +28,13 @@ const Footer = () => {
                         </nav>
                     </div>
                 </div>
-                <div class="flex justify-between items-center mb-6">
+                <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center mb-6 gap-8">
                     <div>
-                        <p class="max-w-md text-theme-gray/50">
-                            Audiophile is an all in one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we’re open 7 days a week.
+                        <p class="max-w-md text-theme-gray/50 text-sm">
+                            Audiophile is an all in one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we're open 7 days a week.
                         </p>
                     </div>
-                    <ul class="flex gap-4">
+                    <ul class="flex gap-4 lg:self-start">
                         <li>
                             <a href="#" aria-label="Facebook" class="hover:text-theme-orange transition">
                                 <img src={fbIcon} />
